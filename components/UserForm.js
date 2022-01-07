@@ -6,9 +6,9 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { memo, useContext, useRef, useState } from "react";
+import { memo, useContext, useRef } from "react";
 import { db } from "../firebase";
-import { UserContext } from "../pages/userContext";
+import { UserContext } from "./UserContext";
 
 const UserForm = () => {
   const inputAreaRef = useRef();

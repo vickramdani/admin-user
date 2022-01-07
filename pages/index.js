@@ -1,7 +1,7 @@
 import { Alert, Box, Snackbar } from "@mui/material";
 import { useCallback, useState } from "react";
 import UserDashboard from "../components/UserDashboard";
-import { UserContext } from "./userContext";
+import { UserContext } from "../components/UserContext";
 
 export default function Home() {
   const [user, setUser] = useState({ username: "", email: "" });

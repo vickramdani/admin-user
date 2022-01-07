@@ -13,7 +13,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { memo, useContext } from "react";
-import { UserContext } from "../pages/userContext";
+import { UserContext } from "./UserContext";
 
 const UserList = ({ users }) => {
   const { showAlert, setUser } = useContext(UserContext);
