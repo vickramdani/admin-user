@@ -13,7 +13,7 @@ import { UserContext } from "./UserContext";
 const UserForm = () => {
   const inputAreaRef = useRef();
   const { showAlert, user, setUser } = useContext(UserContext);
-  // const [clicked, setClicked] = useState(false)
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {

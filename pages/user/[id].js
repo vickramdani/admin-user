@@ -13,6 +13,7 @@ import { memo } from "react";
 
 const Details = ({ userProps }) => {
   const user = JSON.parse(userProps);
+  console.log(user);
 
   return (
     <Grid
@@ -61,26 +62,27 @@ const Details = ({ userProps }) => {
 };
 export default memo(Details);
 
-// export const getStaticPaths = async () => {
-//   const snapshot = await getDocs(collection(db, "user-data"));
-//   const paths = snapshot.docs.map((doc) => {
-//     return {
-//       params: { id: doc.id.toString() },
-//     };
-//   });
+export const getStaticPaths = async () => {
+  const snapshot = await getDocs(collection(db, "user-data"));
+  const paths = snapshot.docs.map((doc) => {
+    return {
+      params: { id: doc.id.toString() },
+    };
+  });
 
-//   return {
-//     paths,
-//     fallback: false,
-//   };
-// };
+  return {
+    paths,
+    fallback: false,
+  };
+};
 
-export const getServerSideProps = async (context) => {
+export const getStaticProps = async (context) => {
   const id = context.params.id;
   const docRef = doc(db, "user-data", id);
   const docSnap = await getDoc(docRef);
 
   return {
     props: { userProps: JSON.stringify(docSnap.data()) || null },
+    revalidate: 3,
   };
 };
