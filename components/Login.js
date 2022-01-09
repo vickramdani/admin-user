@@ -30,7 +30,7 @@ const Login = () => {
         style={{ minHeight: "100vh" }}
       >
         <Grid items>
-          <Typography variant="h5">Log In</Typography>
+          <Typography variant="h5">Sign In</Typography>
         </Grid>
         <Box>
           <Grid items>
@@ -58,7 +58,14 @@ const Login = () => {
               textAlign: "center",
             }}
           >
-            <Button variant="contained" onClick={loginWithEmail}>
+            <Button
+              variant="contained"
+              onClick={loginWithEmail}
+              sx={{
+                backgroundColor: "#00e676",
+                width: "100%",
+              }}
+            >
               Sign in
             </Button>
           </Grid>
@@ -79,7 +86,7 @@ const Login = () => {
             startIcon={<GoogleIcon />}
             onClick={loginWithGoogle}
           >
-            Log in with Google
+            Sign in with Google
           </Button>
         </Grid>
       </Grid>

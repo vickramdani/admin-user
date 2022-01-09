@@ -10,19 +10,29 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
-import { deleteDoc, doc } from "firebase/firestore";
-import { db } from "../firebase";
-import { memo, useContext } from "react";
+import ReadMoreIcon from "@mui/icons-material/ReadMore";
+
+import { useRouter } from "next/router";
+import { memo, useContext, useState } from "react";
 import { UserContext } from "./UserContext";
+import Link from "next/link";
 
 const UserList = ({ users }) => {
   const { showAlert, setUser } = useContext(UserContext);
+  const router = useRouter();
+
   const deleteUser = async (id, e) => {
     e.preventDefault();
     const docRef = doc(db, "user-data", id);
     await deleteDoc(docRef);
     showAlert("success", `User with ID: ${id} deleted successfully`);
   };
+
+  const seeMore = (id, e) => {
+    e.preventDefault();
+    router.push(`/user/${id}`);
+  };
+
   return (
     <TableContainer component={Paper} sx={{ mt: 7, mb: 5 }}>
       <Table sx={{ minWidth: 450 }} aria-label="simple table">
@@ -32,7 +42,9 @@ const UserList = ({ users }) => {
           }}
         >
           <TableRow>
-            <TableCell sx={{ color: "secondary.main" }}>Username</TableCell>
+            <TableCell align="center" sx={{ color: "secondary.main" }}>
+              Username
+            </TableCell>
             <TableCell align="center" sx={{ color: "secondary.main" }}>
               Email
             </TableCell>
@@ -47,29 +59,39 @@ const UserList = ({ users }) => {
               key={user.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <TableCell align="center" component="th" scope="row">
                 {user.username}
               </TableCell>
               <TableCell align="center">{user.email}</TableCell>
               <TableCell align="center">
                 <IconButton
-                  color="error"
+                  color="tertiary"
                   onClick={(e) => deleteUser(user.id, e)}
                 >
                   <DeleteIcon />
                 </IconButton>
+                <Link href="/input">
+                  <IconButton
+                    color="tertiary"
+                    onClick={() =>
+                      setUser({
+                        id: user.id,
+                        username: user.username,
+                        email: user.email,
+                        citizenship: user.citizenship,
+                        occupation: user.occupation,
+                        timestamp: user.timestamp,
+                      })
+                    }
+                  >
+                    <EditIcon />
+                  </IconButton>
+                </Link>
                 <IconButton
                   color="tertiary"
-                  onClick={() =>
-                    setUser({
-                      id: user.id,
-                      username: user.username,
-                      email: user.email,
-                      timestamp: user.timestamp,
-                    })
-                  }
+                  onClick={(e) => seeMore(user.id, e)}
                 >
-                  <EditIcon />
+                  <ReadMoreIcon />
                 </IconButton>
               </TableCell>
             </TableRow>

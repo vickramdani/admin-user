@@ -6,13 +6,14 @@ import {
   serverTimestamp,
   updateDoc,
 } from "firebase/firestore";
-import { memo, useContext, useRef } from "react";
+import { memo, useContext, useRef, useState } from "react";
 import { db } from "../firebase";
 import { UserContext } from "./UserContext";
 
 const UserForm = () => {
   const inputAreaRef = useRef();
   const { showAlert, user, setUser } = useContext(UserContext);
+  // const [clicked, setClicked] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -21,7 +22,7 @@ const UserForm = () => {
         const docRef = doc(db, "user-data", user.id); // specify the document by id
         const userUpdated = { ...user };
         await updateDoc(docRef, userUpdated); // update the user
-        setUser({ username: "", email: "" });
+        setUser({ username: "", email: "", citizenship: "", occupation: "" });
         showAlert(
           "info",
           `User with ${user.id} ID has been updated successfully`
@@ -33,7 +34,7 @@ const UserForm = () => {
           ...user,
           timestamp: serverTimestamp(),
         });
-        setUser({ username: "", email: "" });
+        setUser({ username: "", email: "", citizenship: "", occupation: "" });
         showAlert(
           "success",
           `User with ${docRef.id} ID has been added successfully`
@@ -58,6 +59,20 @@ const UserForm = () => {
         margin="normal"
         value={user.email}
         onChange={(e) => setUser({ ...user, email: e.target.value })}
+      />
+      <TextField
+        fullWidth
+        label="Citizenship"
+        margin="normal"
+        value={user.citizenship}
+        onChange={(e) => setUser({ ...user, citizenship: e.target.value })}
+      />
+      <TextField
+        fullWidth
+        label="Occupation"
+        margin="normal"
+        value={user.occupation}
+        onChange={(e) => setUser({ ...user, occupation: e.target.value })}
       />
       <Button
         variant="contained"

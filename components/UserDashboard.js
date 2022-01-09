@@ -3,8 +3,8 @@ import { memo, useEffect, useState } from "react";
 import { db } from "../firebase";
 import Container from "@mui/material/Container";
 import UserList from "./UserList";
-import { Box, Typography } from "@mui/material";
-import UserForm from "./UserForm";
+import { Box, Button, Typography } from "@mui/material";
+import Link from "next/link";
 
 const UserDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -24,11 +24,22 @@ const UserDashboard = () => {
     return unsubscribe;
   }, []);
   return (
-    <Container maxWidth="sm" sx={{ mt: 6 }}>
+    <Container maxWidth="md" sx={{ mt: 6 }}>
       <Typography variant="h2" component="div">
-        <Box sx={{ fontWeight: "bold", textAlign: "center" }}>User Panel</Box>
+        <Box sx={{ fontWeight: "bold", textAlign: "center", mb: 4 }}>
+          User Panel
+        </Box>
       </Typography>
-      <UserForm />
+      <Link href="/input">
+        <Button
+          variant="contained"
+          color="primary"
+          sx={{ color: "secondary.main" }}
+        >
+          Add New User
+        </Button>
+      </Link>
+
       <UserList users={users} />
     </Container>
   );
