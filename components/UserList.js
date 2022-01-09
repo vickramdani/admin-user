@@ -16,6 +16,8 @@ import { useRouter } from "next/router";
 import { memo, useContext, useState } from "react";
 import { UserContext } from "./UserContext";
 import Link from "next/link";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const UserList = ({ users }) => {
   const { showAlert, setUser } = useContext(UserContext);

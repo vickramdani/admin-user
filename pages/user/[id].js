@@ -61,21 +61,7 @@ const Details = ({ userProps }) => {
 };
 export default memo(Details);
 
-export const getStaticPaths = async () => {
-  const snapshot = await getDocs(collection(db, "user-data"));
-  const paths = snapshot.docs.map((doc) => {
-    return {
-      params: { id: doc.id.toString() },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps = async (context) => {
+export const getServerSideProps = async (context) => {
   const id = context.params.id;
   const docRef = doc(db, "user-data", id);
   const docSnap = await getDoc(docRef);
