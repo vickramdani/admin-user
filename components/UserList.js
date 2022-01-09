@@ -70,7 +70,7 @@ const UserList = ({ users }) => {
                 >
                   <DeleteIcon />
                 </IconButton>
-                <Link href="/input">
+                <Link href="/input" passHref>
                   <IconButton
                     color="tertiary"
                     onClick={() =>

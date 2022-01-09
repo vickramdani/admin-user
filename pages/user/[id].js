@@ -50,7 +50,7 @@ const Details = ({ userProps }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link href="/">
+            <Link href="/" passHref>
               <Button size="small">Back to dashboard</Button>
             </Link>
           </CardActions>

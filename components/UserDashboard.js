@@ -30,7 +30,7 @@ const UserDashboard = () => {
           User Panel
         </Box>
       </Typography>
-      <Link href="/input">
+      <Link href="/input" passHref>
         <Button
           variant="contained"
           color="primary"
