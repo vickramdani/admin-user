@@ -6,11 +6,18 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
+import { useRouter } from "next/router";
 import { useAuth } from "../Auth";
 import { auth } from "../firebase";
 
 const NavBar = () => {
-  const { currentUser } = useAuth();
+  const router = useRouter();
+
+  const logOut = () => {
+    router.push("/");
+    auth.signOut();
+  };
+
   return (
     <AppBar position="static" color="transparent">
       <Toolbar>
@@ -22,16 +29,19 @@ const NavBar = () => {
           </Grid>
 
           <Grid item xs="auto">
-            <Avatar src={currentUser.photoURL} />
-          </Grid>
-
-          <Grid item xs="auto">
-            <Typography variant="h7">{currentUser.displayName}</Typography>
+            <Button
+              onClick={() => router.push("/profile")}
+              variant="text"
+              color="tertiary"
+              style={{ fontSize: "14px" }}
+            >
+              Profile
+            </Button>
           </Grid>
 
           <Grid item xs="auto">
             <Button
-              onClick={() => auth.signOut()}
+              onClick={logOut}
               variant="outlined"
               color="tertiary"
               style={{ fontSize: "14px" }}

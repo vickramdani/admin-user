@@ -1,11 +1,14 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   Grid,
+  IconButton,
   Typography,
 } from "@mui/material";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { db } from "../../firebase";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
 import Link from "next/link";
@@ -25,36 +28,79 @@ const Details = ({ userProps }) => {
       style={{ minHeight: "100vh" }}
     >
       <Grid items xs={5}>
-        <Card
-          sx={{ minWidth: 550, boxShadow: 3 }}
-          style={{ backgroundColor: "#fafafa" }}
-        >
+        <Card sx={{ minWidth: 550, boxShadow: 3, borderRadius: "20px", p: 3 }}>
+          <Box
+            sx={{
+              mb: 2,
+            }}
+          >
+            <Link href="/" passHref>
+              <IconButton>
+                <ArrowBackIosNewIcon />
+              </IconButton>
+            </Link>
+          </Box>
           <CardContent>
             <Typography
               variant="h4"
               component="div"
-              sx={{ textAlign: "center", mb: 2 }}
+              sx={{ textAlign: "center", mb: 5, fontWeight: "bold" }}
             >
               User Information
             </Typography>
-            <Typography variant="h5" component="div">
-              Name: {user.username}
-            </Typography>
-            <Typography variant="h5" component="div">
-              Email: {user.email}
-            </Typography>
-            <Typography variant="h5" component="div">
-              Citizenship: {user.citizenship}
-            </Typography>
-            <Typography variant="h5" component="div">
-              Occupation: {user.occupation}
-            </Typography>
+
+            <Box sx={{ display: "flex", mb: 2 }}>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ fontWeight: "bold", mr: 2 }}
+              >
+                Name:
+              </Typography>
+              <Typography variant="h5" component="div">
+                {user.username}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: "flex", mb: 2 }}>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ fontWeight: "bold", mr: 2 }}
+              >
+                email:
+              </Typography>
+              <Typography variant="h5" component="div">
+                {user.email}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: "flex", mb: 2 }}>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ fontWeight: "bold", mr: 2 }}
+              >
+                Citizenship:
+              </Typography>
+              <Typography variant="h5" component="div">
+                {user.citizenship}
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: "flex", mb: 2 }}>
+              <Typography
+                variant="h5"
+                component="div"
+                sx={{ fontWeight: "bold", mr: 2 }}
+              >
+                Occupation:
+              </Typography>
+              <Typography variant="h5" component="div">
+                {user.occupation}
+              </Typography>
+            </Box>
           </CardContent>
-          <CardActions>
-            <Link href="/" passHref>
-              <Button size="small">Back to dashboard</Button>
-            </Link>
-          </CardActions>
         </Card>
       </Grid>
     </Grid>
@@ -72,7 +118,7 @@ export const getStaticPaths = async () => {
 
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 
@@ -83,6 +129,6 @@ export const getStaticProps = async (context) => {
 
   return {
     props: { userProps: JSON.stringify(docSnap.data()) || null },
-    revalidate: 3,
+    revalidate: 5,
   };
 };

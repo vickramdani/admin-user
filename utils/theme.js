@@ -15,6 +15,9 @@ const base = createTheme({
       main: "#d50000",
     },
   },
+  typography: {
+    fontFamily: ["Montserrat", "Roboto"].join(","),
+  },
 });
 
 const theme = responsiveFontSizes(base);

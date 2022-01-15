@@ -1,13 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
-import Login from "./components/Login";
+import Login from "./pages/account/login";
+import Register from "./pages/account/register";
 import Loading from "./components/Loading";
+import { useRouter } from "next/router";
 
 const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
   useEffect(() => {
     const auth = getAuth();
     return auth.onIdTokenChanged(async (user) => {
@@ -20,8 +24,6 @@ export const AuthProvider = ({ children }) => {
       const token = await user.getIdToken();
       setCurrentUser(user);
       setLoading(false);
-      console.log("token", token);
-      console.log("user", user);
     });
   }, []);
 

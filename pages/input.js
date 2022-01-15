@@ -1,5 +1,6 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
+import { Box, Button, Grid, IconButton, Typography } from "@mui/material";
 import Container from "@mui/material/Container";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 
 import Link from "next/link";
 import UserForm from "../components/UserForm";
@@ -7,9 +8,15 @@ import UserForm from "../components/UserForm";
 const Input = () => {
   return (
     <Container maxWidth="sm" sx={{ mt: 6 }}>
-      <Box sx={{ mb: 5 }}>
+      <Box
+        sx={{
+          mb: 4,
+        }}
+      >
         <Link href="/" passHref>
-          <Button size="small">Back to dashboard</Button>
+          <IconButton>
+            <ArrowBackIosNewIcon />
+          </IconButton>
         </Link>
       </Box>
       <Grid

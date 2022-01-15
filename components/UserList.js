@@ -44,13 +44,22 @@ const UserList = ({ users }) => {
           }}
         >
           <TableRow>
-            <TableCell align="center" sx={{ color: "secondary.main" }}>
+            <TableCell
+              align="center"
+              sx={{ color: "secondary.main", fontSize: "20px" }}
+            >
               Username
             </TableCell>
-            <TableCell align="center" sx={{ color: "secondary.main" }}>
+            <TableCell
+              align="center"
+              sx={{ color: "secondary.main", fontSize: "20px" }}
+            >
               Email
             </TableCell>
-            <TableCell align="center" sx={{ color: "secondary.main" }}>
+            <TableCell
+              align="center"
+              sx={{ color: "secondary.main", fontSize: "20px" }}
+            >
               Action
             </TableCell>
           </TableRow>
@@ -61,10 +70,17 @@ const UserList = ({ users }) => {
               key={user.id}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell align="center" component="th" scope="row">
+              <TableCell
+                align="center"
+                component="th"
+                scope="row"
+                sx={{ fontSize: "17px" }}
+              >
                 {user.username}
               </TableCell>
-              <TableCell align="center">{user.email}</TableCell>
+              <TableCell align="center" sx={{ fontSize: "17px" }}>
+                {user.email}
+              </TableCell>
               <TableCell align="center">
                 <IconButton
                   color="tertiary"
